@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2cae519d-2afe-4160-886c-0bebe4d2ddd9" name="SFTP" url="http://git.dscvlab.com">
+        <fileTransfer host="git.dscvlab.com" port="22" rootFolder="/home/lujianxiao" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

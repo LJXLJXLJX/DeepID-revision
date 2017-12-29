@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="SFTP">
+    <serverData>
+      <paths name="Copy of project-level server 'SFTP'">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/Project/Deepid" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/data/aligned_images_DB" />
+            <excludedPath local="true" path="$PROJECT_DIR$/data/crop_images_DB" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="Copy of project-level server 'SFTP' (1)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/Project/Deepid" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/data/aligned_images_DB" />
+            <excludedPath local="true" path="$PROJECT_DIR$/data/crop_images_DB" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="SFTP">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/Project/Deepid" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/data/aligned_images_DB" />
+            <excludedPath local="true" path="$PROJECT_DIR$/data/crop_images_DB" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
