@@ -2,26 +2,26 @@
 预处理 分割出数据集图片人脸的部分
 '''
 
-
-
-#! /usr/bin/python
+# ! /usr/bin/python
 import os
 from PIL import Image
+
 
 def crop_img_by_half_center(src_file_path, dest_file_path):
     im = Image.open(src_file_path)
     x_size, y_size = im.size
     start_point_xy = x_size / 4
-    end_point_xy   = x_size / 4 + x_size / 2
+    end_point_xy = 3 * x_size / 4
     box = (start_point_xy, start_point_xy, end_point_xy, end_point_xy)
     new_im = im.crop(box)
-    new_new_im = new_im.resize((47,55))
+    new_new_im = new_im.resize((55, 55))
     new_new_im.save(dest_file_path)
+
 
 def walk_through_the_folder_for_crop(aligned_db_folder, result_folder):
     if not os.path.exists(result_folder):
         os.mkdir(result_folder)
-    
+
     i = 0
     img_count = 0
     for people_folder in os.listdir(aligned_db_folder):
@@ -40,7 +40,8 @@ def walk_through_the_folder_for_crop(aligned_db_folder, result_folder):
                 crop_img_by_half_center(src_img_path, dest_img_path)
             i += 1
             img_count += len(os.listdir(src_video_path))
-        
+
+
 if __name__ == '__main__':
     aligned_db_folder = "data/aligned_images_DB"
     result_folder = "data/crop_images_DB"
@@ -49,4 +50,3 @@ if __name__ == '__main__':
     if not result_folder.endswith('/'):
         result_folder += '/'
     walk_through_the_folder_for_crop(aligned_db_folder, result_folder)
-    

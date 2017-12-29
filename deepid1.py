@@ -64,6 +64,8 @@ def conv_pool_layer(x, w_shape, b_shape, layer_name, act=tf.nn.relu, only_conv=F
 def accuracy(y, y_):
     with tf.name_scope('accuracy'):
         with tf.name_scope('correct_prediction'):
+            #每个batch1024 y y_都是 1024*classnum的
+            #equal每次比一个得到（1，0，1，0，...，1）这种 1024维向量 均值即为该batch　的 accuracy
             correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
         with tf.name_scope('accuracy'):
             accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
@@ -78,7 +80,7 @@ def train_step(loss):
 
 #构建网络结构
 with tf.name_scope('input'):
-    h0 = tf.placeholder(tf.float32, [None, 55, 47, 3], name='x')    #输入
+    h0 = tf.placeholder(tf.float32, [None, 55, 55, 3], name='x')    #输入
     y_ = tf.placeholder(tf.float32, [None, class_num], name='y')    #分类结果 是个1283维 onehot码
 
 h1 = conv_pool_layer(h0, [4, 4, 3, 20], [20], 'Conv_layer_1')
