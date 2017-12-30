@@ -5,14 +5,10 @@
 #! /usr/bin/python
 import pickle
 import numpy as np
-from PIL import Image
+import cv2
 
-#将PIL.Image读取到的图片转成numpy.ndarray
-#如果用cv2读取就不需要这一步了
-def vectorize_imgs(img_path):
-    with Image.open(img_path) as img:
-        arr_img = np.asarray(img, dtype='float32')
-        return arr_img
+
+
 
 #读取训练集 返回两个值 第一个为图片 第二个为标签（身份编号）
 def read_csv_file(csv_file):
@@ -20,7 +16,7 @@ def read_csv_file(csv_file):
     with open(csv_file, "r") as f:
         for line in f.readlines():
             path, label = line.strip().split()
-            x.append(vectorize_imgs(path))
+            x.append(cv2.imread(path))
             y.append(int(label))
     return np.asarray(x, dtype='float32'), np.asarray(y, dtype='int32')
 
@@ -30,8 +26,8 @@ def read_csv_pair_file(csv_file):
     with open(csv_file, "r") as f:
         for line in f.readlines():
             p1, p2, label = line.strip().split()
-            x1.append(vectorize_imgs(p1))
-            x2.append(vectorize_imgs(p2))
+            x1.append(cv2.imread(p1))
+            x2.append(cv2.imread(p2))
             y.append(int(label))
     return np.asarray(x1, dtype='float32'), np.asarray(x2, dtype='float32'), np.asarray(y, dtype='int32')
 

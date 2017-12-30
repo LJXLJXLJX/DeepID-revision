@@ -90,10 +90,10 @@ h4 = conv_pool_layer(h3, [2, 2, 60, 80], [80], 'Conv_layer_4', only_conv=True)
 
 # Deepid层，与最后两个卷积层相连接
 with tf.name_scope('DeepID1'):
-    h3r = tf.reshape(h3, [-1, 5 * 4 * 60])
-    h4r = tf.reshape(h4, [-1, 4 * 3 * 80])
-    W1 = weight_variable([5 * 4 * 60, 160])
-    W2 = weight_variable([4 * 3 * 80, 160])
+    h3r = tf.reshape(h3, [-1, 5 * 5 * 60])
+    h4r = tf.reshape(h4, [-1, 4 * 4 * 80])
+    W1 = weight_variable([5 * 5 * 60, 160])
+    W2 = weight_variable([4 * 4 * 80, 160])
     b = bias_variable([160])
     h = tf.matmul(h3r, W1) + tf.matmul(h4r, W2) + b
     h5 = tf.nn.relu(h)
@@ -128,8 +128,6 @@ if __name__ == '__main__':
     #转成onehotkey
     data_y = (np.arange(class_num) == trainY[:, None]).astype(np.float32) #训练分类结果 onehot码表示
     validY = (np.arange(class_num) == validY[:, None]).astype(np.float32)
-    print(data_y.shape)
-    print(validY.shape)
 
     logdir = 'log'
     if tf.gfile.Exists(logdir):
@@ -145,10 +143,12 @@ if __name__ == '__main__':
     start_time=time.time()
     for i in range(50001):
         batch_x, batch_y, idx = get_batch(data_x, data_y, idx)
+        #分类训练集
         summary, _ = sess.run([merged, train_step], {h0: batch_x, y_: batch_y})
         train_writer.add_summary(summary, i)
 
         if i % 100 == 0:
+            #分类测试集
             summary, accu = sess.run([merged, accuracy], {h0: validX, y_: validY})
             print('step:',i,'/50000 ',time.time()-start_time,'s')
             test_writer.add_summary(summary, i)

@@ -10,7 +10,7 @@ def faceDetect(img):
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
     if len(faces) == 0:
         img=cv2.resize(img, (55, 55))
-        img = img[:, 4:51]
+
         return img
 
     max_x = 0
@@ -29,7 +29,7 @@ def faceDetect(img):
     # 其中最大的人脸图像
     largestFace = img[max_y:max_y + max_h, max_x:max_x + max_w]
     largestFace=cv2.resize(largestFace,(55,55))
-    largestFace=largestFace[:,4:51]
+
 
     return largestFace
 
