@@ -77,8 +77,7 @@ def compare(pic1,pic2):
     pic2=faceDetect(pic2).reshape(1,55,55,3)
 
 
-    cv2.imshow('1', pic1.reshape(55,55,3))
-    cv2.imshow('2', pic2.reshape(55,55,3))
+
 
     with tf.Session() as sess:
         saver.restore(sess, 'checkpoint/50000.ckpt')
@@ -86,12 +85,13 @@ def compare(pic1,pic2):
         h2 = sess.run(h5, {h0: pic2})
         return np.array([cosine(x, y) for x, y in zip(h1, h2)])[0]
 
-pic1='data/crop_images_DB/Kevin_Keegan/0/aligned_detect_0.180.jpg'
-pic2='data/crop_images_DB/Raghad_Saddam_Hussein/1/aligned_detect_1.1432.jpg'
-start=time.time()
-sim=compare(pic1,pic2)
-print(sim,' ',sim<=0.5,'\n',time.time()-start,'s')
+
+def test():
+    pic1='data/aligned_images_DB/Taha_Yassin_Ramadan/0/aligned_detect_0.134.jpg'
+    pic2='data/aligned_images_DB/Taha_Yassin_Ramadan/0/aligned_detect_0.98.jpg'
+    start=time.time()
+    sim=compare(pic1,pic2)
+    print(sim,' ',sim<=0.5,'\n',time.time()-start,'s')
 
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+test()
